@@ -338,7 +338,7 @@ sub do_snapshots
 	        }
 	        else{_log($ref_cfg_info->{'logfile'}, 'info',"Prescript execution success in $_->{'volumeId'}");}
 	    }
-	    $snapshot = $$ec2->create_snapshot(-volume_id=>$_->{'volumeId'},-description=>"Created automatically by instance $_->{'instanceId'}");
+	    $snapshot = $$ec2->create_snapshot(-volume_id=>$_->{'volumeId'},-description=>"Created automatically by instance $_->{'instanceId'} from volume $_->{'volumeId'}");
             (_log($ref_cfg_info->{'logfile'}, 'warn', "Error creating snapshot API: $$ec2->{'aws'}->{'error'}\n"), next) if (defined($$ec2->{'aws'}->{'error'}));
 	    (_log($ref_cfg_info->{'logfile'}, 'warn',"The snapshot of the volume  $_->{'volumeId'} was taken but the Postscript execution failed!"), next) if (_postscript($_->{'postscript'}) != 0);
 	    _log($ref_cfg_info->{'logfile'}, 'info',"The snapshot of the volume $_->{'volumeId'} was taken");
@@ -381,7 +381,7 @@ sub do_snapshots
 		}
 	
 		## Create
-    	        my $snapshot = $$ec2->create_snapshot(-volume_id=>$_->{'volumeId'},-description=>"Created automatically by instance $_->{'instanceId'}");
+    	        my $snapshot = $$ec2->create_snapshot(-volume_id=>$_->{'volumeId'},-description=>"Created automatically by instance $_->{'instanceId'}  from volume $_->{'volumeId'}");
                 (_log($ref_cfg_info->{'logfile'}, 'warn', "Error creating snapshot API: $$ec2->{'aws'}->{'error'}\n"), next) if (defined($$ec2->{'aws'}->{'error'}));
 	        _log($ref_cfg_info->{'logfile'}, 'info',"creating a new snapshot in volume  $_->{'volumeId'}");
 
