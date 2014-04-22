@@ -1,0 +1,34 @@
+the installation is based in an Amazon Linux AMI 2014.03.1 - ami-043a5034 (64-bit)
+
+A) Firstly we have to install some tools using yum
+
+# yum update
+
+# yum install cpan
+
+# yum install make
+
+# yum install gcc
+
+# yum install perl-Net-SSLeay.x86_64
+
+ 
+
+B) Now we have to execute "cpan" It will ask you some basic question (first time it runs),c After that lets install these libraries
+
+cpan> install Config::Tiny
+
+cpan>force  install VM::EC2  ## Force to avoid API tests
+
+cpan> install Params::Validate
+
+cpan> install Date::Manip
+
+cpan> install Date::Parse
+
+** Some libraries take long time to install, it depends on the dependencies it needs.
+
+If everything was OK we should see OK in "perl -c"
+
+perl -c Backup.pl
+Backup.pl syntax OK
