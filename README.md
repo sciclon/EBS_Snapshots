@@ -1,4 +1,4 @@
-EBS_SnapSnapshots
+EBS_Snapshots
 =================
 
 EBS Automatic SnapShots
