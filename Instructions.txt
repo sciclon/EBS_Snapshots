@@ -20,7 +20,7 @@ The script will run indefinitely in a "loop" checking when it is necessary to ex
 only_attached_volumes=n
 This means the script only will be able to make snapshots to local (attached) volumes, if you want to create not attached volumes snapshots you have to change this parameter to 'y'
 
-logfile=/tmp/log
+logfile=/var/log/file.log
 You can set up the log file, you can use the STDOUT as well , like this logfile=STDOUT
 If it is not set the default value is STDOUT
 
