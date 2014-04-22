@@ -13,7 +13,6 @@ use Config::Tiny;
 use Getopt::Std;
 use VM::EC2;
 use VM::EC2::Instance::Metadata;
-use Data::Dump qw(dump);
 use Date::Parse;
 ## MAIN
 
