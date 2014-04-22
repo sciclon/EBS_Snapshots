@@ -1,0 +1,73 @@
+HOW TO USE;
+
+you have to execute the program passing a config file,
+perl Backup.pl -c /etc/myconfigfile
+
+Config file should looks like this:
+
+## GENERAL VALUES
+[general]
+## Credentials
+AWSAccessKeyId=XXXXXXXXXXXXX   
+SecretAccessKey=XXXXXXXXXXX    
+
+daemon_mode=n
+It means the script will run just once, it will do its job and the process will finish.
+You have to add the line in crontab or run the script in a console.
+daemon_mode=y
+The script will run indefinitely in a "loop" checking when it is necessary to execute a new API call to create a snapshot/s
+
+only_attached_volumes=n
+This means the script only will be able to make snapshots to local (attached) volumes, if you want to create not attached volumes snapshots you have to change this parameter to 'y'
+
+logfile=/tmp/log
+You can set up the log file, you can use the STDOUT as well , like this logfile=STDOUT
+If it is not set the default value is STDOUT
+
+## VOLUMES
+
+[vol-XXXXXXXX]
+for each volume you have to add a tag with all the configurations, they are different for each volume
+
+freq=1
+You define a frequency in hours, minimum is 1 hour, for example create a snapshot each 3 hours.
+
+quantity=8
+The quantity, it works like a "round-robin" when it reaches the limit it will delete the oldest snapshot and create a new one.
+
+prescript=/bin/test
+You can add your own script to execute whatever you want, the only thing you have to take in account is the exit code, the program will wait for "0" to success, any other different exit code will be considered an error.
+The script will be executed always before "create-snapshot" API call.
+
+skip_if_prescript_fails=n
+You can skip the snapshot creating if something were wrong in your prescript or keep like nothing happened.
+
+protected_snapshots=snap-XXXXXX, snap-XXXXX
+You can protect some snapshots putting them outside the script limit, They wont be taken in account, they wont be counted in "quantity".
+
+postscript=/bin/test
+As prescript but this will be executed after "create-snapshot" API call.
+
+## More volumes......
+[vol-XXXXXXX]
+freq=2
+quantity=5
+prescript=/bin/test
+skip_if_prescript_fails=n
+protected_snapshots=snap-XXXXXX
+postscript=/bin/test
+ 
+
+ 
+
+##############################################
+
+HOW TO RELOAD THE CONFIG IN DAEMON MODE?
+
+You have to create a file in /tmp like this
+
+touch /tmp/.reconfigure.PID
+
+*PID is the process Id, you can find out it executing:
+
+ps aux|grep Backup.pl
