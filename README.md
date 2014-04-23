@@ -11,7 +11,7 @@ Finally I decided to create a program more flexible, centralized and easy to adm
 The main idea is to have a centralized program to rule all the EBS volumes and snapshots.
 Besides you can  hook your code before running each snapshot and after it. 
 
-Some features on they way
+Some features on their way
 
 * Synchronous  waiting state in create/delete snapshot getting a real complete/fail status.
 * Timeout to Synchronous  waiting state.
