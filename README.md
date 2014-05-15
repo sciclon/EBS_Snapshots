@@ -19,3 +19,4 @@ Some features on their way
 * Pass some environment variable to prescript and postscript.
 * Adding roles EC2 instance roles to validate.
 * Run one thread per volume to make the job in parallel (Faster).
+* Tags to configure volumes and tags with information of the snapshot.
